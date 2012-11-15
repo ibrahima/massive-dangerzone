@@ -2,8 +2,8 @@
   <name>moveit_sqp_planner_ros_plugin</name>
   <version>0.0.0</version>
   <description>MoveIt plugin for the SQP Planner interface</description>
-  <author email=""></author>
-  <maintainer email=""></maintainer>
+  <author email="a@b.com">A B</author>
+  <maintainer email="a@b.com">A B</maintainer>
 
   <license>BSD</license>
 

@@ -1,47 +1,16 @@
-cmake_minimum_required(VERSION 2.4.6)
-include($ENV{ROS_ROOT}/core/rosbuild/rosbuild.cmake)
+set(MOVEIT_LIB_NAME moveit_sqpp_interface_ros)
 
-# Set the build type.  Options are:
-#  Coverage       : w/ debug symbols, w/o optimization, w/ code-coverage
-#  Debug          : w/ debug symbols, w/o optimization
-#  Release        : w/o debug symbols, w/ optimization
-#  RelWithDebInfo : w/ debug symbols, w/ optimization
-#  MinSizeRel     : w/o debug symbols, w/ optimization, stripped binaries
-#set(ROS_BUILD_TYPE RelWithDebInfo)
+add_library(${MOVEIT_LIB_NAME} src/sqpp_interface_ros.cpp src/rosconversions.cpp)
+target_link_libraries(${MOVEIT_LIB_NAME} ${catkin_LIBRARIES} ${Boost_LIBRARIES})
 
-rosbuild_init()
+# TODO: Build planning server
+#add_executable(moveit_sqpp_planner src/sqpp_planner.cpp)
+#target_link_libraries(moveit_sqpp_planner ${MOVEIT_LIB_NAME})
 
-rosbuild_add_boost_directories()
+add_library(moveit_sqpp_planner_plugin src/sqpp_plugin.cpp)
+target_link_libraries(moveit_sqpp_planner_plugin ${MOVEIT_LIB_NAME})
 
-find_package(Eigen REQUIRED)
-include_directories(${EIGEN_INCLUDE_DIRS})
-
-#set the default path for built executables to the "bin" directory
-set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
-#set the default path for built libraries to the "lib" directory
-set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
-
-#uncomment if you have defined messages
-#rosbuild_genmsg()
-#uncomment if you have defined services
-#rosbuild_gensrv()
-
-rosbuild_add_library(${PROJECT_NAME} src/chomp_interface_ros.cpp)
-
-set(SOURCE_FILES src/chomp_plugin.cpp)
-set(LIBRARY_NAME chomp_planner_plugin)
-include(CMakeDetermineSystem)
-if(CMAKE_SYSTEM_NAME MATCHES "Darwin")
-  rosbuild_add_library_module(${LIBRARY_NAME} ${SOURCE_FILES})
-else(CMAKE_SYSTEM_NAME MATCHES "Darwin")
-  rosbuild_add_library(${LIBRARY_NAME} ${SOURCE_FILES})
-endif(CMAKE_SYSTEM_NAME MATCHES "Darwin")
-target_link_libraries(${LIBRARY_NAME} ${PROJECT_NAME})
-
-#common commands for building c++ executables and libraries
-#rosbuild_add_library(${PROJECT_NAME} src/example.cpp)
-#target_link_libraries(${PROJECT_NAME} another_library)
-#rosbuild_add_boost_directories()
-#rosbuild_link_boost(${PROJECT_NAME} thread)
-#rosbuild_add_executable(example examples/example.cpp)
-#target_link_libraries(example ${PROJECT_NAME})
+install(TARGETS ${MOVEIT_LIB_NAME} moveit_sqpp_planner_plugin
+  LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+  RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
+install(DIRECTORY include/ DESTINATION include)

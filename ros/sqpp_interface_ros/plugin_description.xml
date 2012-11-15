@@ -1,5 +1,5 @@
 <library path="lib/libsqp_planner_plugin">
-  <class name="sqpp_interface_ros/SqpPlanner" type="sqpp_interface_ros::SqpPlanner" base_class_type="planning_interface::Planner">
+  <class name="sqpp_interface_ros/SQPPlanner" type="sqpp_interface_ros::SQPPlanner" base_class_type="planning_interface::Planner">
     <description>
     </description>
   </class>

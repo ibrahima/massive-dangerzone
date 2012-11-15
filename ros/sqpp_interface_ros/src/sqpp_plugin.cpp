@@ -15,7 +15,7 @@ namespace sqpp_interface_ros
 class SQPPlanner : public planning_interface::Planner
 {
 public:
-  void init(const planning_models::KinematicModelConstPtr& model)
+  void init(const kinematic_model::KinematicModelConstPtr& model)
   {
     sqpp_interface_.reset(new SQPPInterfaceROS(model));
   }
@@ -32,12 +32,11 @@ public:
              const moveit_msgs::GetMotionPlan::Request &req, 
              moveit_msgs::GetMotionPlan::Response &res) const
   {
-    return sqpp_interface_->solve(planning_scene, req, 
-                                   sqpp_interface_->getParams(),res);
+    return sqpp_interface_->solve(planning_scene, req, res);
   }
 
   bool solve(const planning_scene::PlanningSceneConstPtr& planning_scene,
-             const moveit_msgs::GetMotionPlan::Request &req, 
+             const moveit_msgs::GetMotionPlan::Request &req,
              moveit_msgs::MotionPlanDetailedResponse &res) const
   {
     moveit_msgs::GetMotionPlan::Response res2;
