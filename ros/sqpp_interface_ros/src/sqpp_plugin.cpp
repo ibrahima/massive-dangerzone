@@ -1,6 +1,6 @@
-#include <planning_interface/planning_interface.h>
-#include <planning_scene/planning_scene.h>
-#include <planning_models/kinematic_model.h>
+#include <moveit/planning_interface/planning_interface.h>
+#include <moveit/planning_scene/planning_scene.h>
+#include <moveit/kinematic_model/kinematic_model.h>
 #include <moveit_msgs/GetMotionPlan.h>
 #include <sqpp_interface_ros/sqpp_interface_ros.h>
 #include <sqpp_interface_ros/rosconversions.h>
@@ -40,8 +40,7 @@ public:
              moveit_msgs::MotionPlanDetailedResponse &res) const
   {
     moveit_msgs::GetMotionPlan::Response res2;
-    if (sqpp_interface_->solve(planning_scene, req, 
-                                sqpp_interface_->getParams(),res2))
+    if (sqpp_interface_->solve(planning_scene, req,res2))
     {
       res.trajectory_start = res2.trajectory_start;
       res.trajectory.push_back(res2.trajectory);
