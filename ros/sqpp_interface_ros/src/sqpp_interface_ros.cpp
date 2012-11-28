@@ -39,7 +39,7 @@ bool SQPPInterfaceROS::solve(const planning_scene::PlanningSceneConstPtr& planni
   //TODO: I hate this but it's necessary for RaveObject/BulletObject to work
   util::setGlobalEnv(env);
   //util::setGlobalScene(&scene);
-  //TrajOptimizer opt;
+  TrajOptimizer opt;
   OpenRAVE::RobotBasePtr robot = OpenRAVE::RaveCreateRobot(rave->env, kmodel->getName());
 
   RaveRobotObject::Ptr rro(new RaveRobotObject(rave, robot, CONVEX_HULL, BulletConfig::kinematicPolicy <= 1));

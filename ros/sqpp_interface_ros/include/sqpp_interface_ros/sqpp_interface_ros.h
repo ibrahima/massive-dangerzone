@@ -37,12 +37,12 @@ protected:
   
   ros::NodeHandle nh_; /// The ROS node handle
   RaveInstance::Ptr rave;
- BulletInstance::Ptr bullet;
- OSGInstance::Ptr osg;
- Environment::Ptr env;
- kinematic_model::KinematicModelConstPtr kmodel;
- TrajOptimizer opt;
-// sqpp::SqppParameters params_;  
+  BulletInstance::Ptr bullet;
+  OSGInstance::Ptr osg;
+  Environment::Ptr env;
+  kinematic_model::KinematicModelConstPtr kmodel;
+  TrajOptimizer opt;
+  // sqpp::SqppParameters params_;  
 };
 
 }
