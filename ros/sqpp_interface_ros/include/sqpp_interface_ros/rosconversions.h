@@ -8,6 +8,6 @@
 #include "sqp/collisions.h"
 #include "sqp/planning_problems2.h"
 
-OpenRAVE::KinBody moveitObjectToKinBody(collision_detection::CollisionWorld::Object object);
+OpenRAVE::KinBodyPtr moveitObjectToKinBody(collision_detection::CollisionWorld::ObjectConstPtr object, OpenRAVE::EnvironmentBasePtr env);
 
 void importCollisionWorld(Environment::Ptr env, RaveInstance::Ptr rave, const collision_detection::CollisionWorldConstPtr world);

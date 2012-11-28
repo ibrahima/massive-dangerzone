@@ -96,7 +96,7 @@ bool SQPPInterfaceROS::solve(const planning_scene::PlanningSceneConstPtr& planni
 
   // We want something like:
   
-  setupArmToJointTarget(opt, goalState, robotmanipulatorptr manip);
+  setupArmToJointTarget(opt, goalState, RobotManipulatorPtr());
 
   trajOuterOpt(opt, AllowedCollisions());
 
