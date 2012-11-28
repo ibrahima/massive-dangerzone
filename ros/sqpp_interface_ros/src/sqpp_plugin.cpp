@@ -20,8 +20,7 @@ public:
     sqpp_interface_.reset(new SQPPInterfaceROS(model));
   }
 
-  bool canServiceRequest(const moveit_msgs::GetMotionPlan::Request &req,
-                         planning_interface::PlannerCapability &capabilities) const
+  bool canServiceRequest(const moveit_msgs::GetMotionPlan::Request &req) const
   {
     // TODO: Actually respond with something reasonable
     //      capabilities.dummy = false;
