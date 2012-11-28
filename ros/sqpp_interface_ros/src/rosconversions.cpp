@@ -16,9 +16,9 @@ OpenRAVE::KinBodyPtr moveitObjectToKinBody(collision_detection::CollisionWorld::
     OpenRAVE::KinBody::Link::GeometryInfo info;
     // Convert the Eigen::Affine3D pose into a RaveTransform (translation + quaternion)
     Eigen::Vector3d translation = poses[i].translation();
-    Eigen::Matrix3d rot = poses[i].extractRotation();
+    Eigen::Matrix3d rot = poses[i].rotation();
     info._t.trans = RaveVector<double>(translation[0], translation[1], translation[2]);
-    RaveTransformMatrix<double> rotm();
+    OpenRAVE::geometry::RaveTransformMatrix<double> rotm;
     rotm.rotfrommat(rot(0,0), rot(0,1), rot(0,2),
 		    rot(1,0), rot(1,1), rot(1,2),
 		    rot(2,0), rot(2,1), rot(2,2));
