@@ -86,7 +86,7 @@ bool setRaveRobotState(OpenRAVE::RobotBasePtr robot, sensor_msgs::JointState js)
   vector<int> dofs;
   bool foundAllJoints = true;
   while(nameit != js.name.end()){
-	// Not sure if different types of joints
+	// Not sure if different types of joints need to be handled separately
 	OpenRAVE::KinBody::JointPtr joint = robot->GetJoint(*nameit);
 	if(joint){
 	  dofs.push_back(joint->GetDOFIndex());

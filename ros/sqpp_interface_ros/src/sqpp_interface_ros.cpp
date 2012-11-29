@@ -46,7 +46,7 @@ bool SQPPInterfaceROS::solve(const planning_scene::PlanningSceneConstPtr& planni
   sensor_msgs::JointState js;
 
   // Gathers the goal joint constraints into a JointState object
-  // TODO: Handle position region constraints?
+  // TODO: Handle all constraints, not just first joint constraints
   // TODO: Refactor, this is ugly
   for(unsigned int i = 0; i < req.motion_plan_request.goal_constraints[0].joint_constraints.size(); i++) {
     js.name.push_back(req.motion_plan_request.goal_constraints[0].joint_constraints[i].joint_name);
@@ -68,7 +68,9 @@ bool SQPPInterfaceROS::solve(const planning_scene::PlanningSceneConstPtr& planni
                     req.motion_plan_request.start_state.joint_state, 
                     req.motion_plan_request.group_name,
                     initialState);
-
+  // Note: May need to check req.mpr.start_state.multi_dof_joint_state for base transform and others
+  setRaveRobotState(robot, req.motion_plan_request.start_state.joint_state);
+  
   // Get the goal state
   jointStateToArray(planning_scene->getKinematicModel(),
                     js, 
