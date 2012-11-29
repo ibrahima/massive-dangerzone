@@ -29,8 +29,7 @@ bool SQPPInterfaceROS::solve(const planning_scene::PlanningSceneConstPtr& planni
                          moveit_msgs::GetMotionPlan::Response &res) const
 {
   ros::WallTime start_time = ros::WallTime::now();
-  //Helper class for storing/generating an initial trajectory
-  // (why does it need the kinematic model?)
+
   Eigen::MatrixXd initTraj;
 
   // Initialize a scene
@@ -52,8 +51,6 @@ bool SQPPInterfaceROS::solve(const planning_scene::PlanningSceneConstPtr& planni
   for(unsigned int i = 0; i < req.motion_plan_request.goal_constraints[0].joint_constraints.size(); i++) {
     js.name.push_back(req.motion_plan_request.goal_constraints[0].joint_constraints[i].joint_name);
     js.position.push_back(req.motion_plan_request.goal_constraints[0].joint_constraints[i].position);
-    ROS_INFO_STREAM("Setting joint " << req.motion_plan_request.goal_constraints[0].joint_constraints[i].joint_name
-                    << " to position " << req.motion_plan_request.goal_constraints[0].joint_constraints[i].position);
   }
 
 

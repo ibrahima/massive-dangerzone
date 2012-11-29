@@ -5,6 +5,7 @@
 #include <geometric_shapes/bodies.h>
 #include <boost/shared_ptr.hpp>
 #include <openrave/openrave.h>
+#include <assert.h>
 
 using namespace std;
 OpenRAVE::KinBodyPtr moveitObjectToKinBody(collision_detection::CollisionWorld::ObjectConstPtr object, OpenRAVE::EnvironmentBasePtr env){
@@ -77,4 +78,23 @@ void importCollisionWorld(Environment::Ptr env, RaveInstance::Ptr rave, const co
     env->add(RaveObject::Ptr(new RaveObject(rave, body, CONVEX_HULL, BulletConfig::kinematicPolicy == 0)));
 
   }
+}
+
+bool setRaveRobotState(OpenRAVE::RobotBasePtr robot, sensor_msgs::JointState js){
+  vector<string>::iterator nameit = js.name.begin();
+  vector<double>::iterator posit = js.position.begin();
+  vector<int> dofs;
+  bool foundAllJoints = true;
+  while(nameit != js.name.end()){
+	// Not sure if different types of joints
+	OpenRAVE::KinBody::JointPtr joint = robot->GetJoint(*nameit);
+	if(joint){
+	  dofs.push_back(joint->GetDOFIndex());
+	}else{
+	  foundAllJoints = false;
+	}
+  }
+  assert(js.position.size() == dofs.size());
+  robot->SetDOFValues(js.position, OpenRAVE::KinBody::CLA_CheckLimits, dofs);
+  return foundAllJoints;
 }

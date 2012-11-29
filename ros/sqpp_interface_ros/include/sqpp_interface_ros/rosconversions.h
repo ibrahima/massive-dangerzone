@@ -11,3 +11,5 @@
 OpenRAVE::KinBodyPtr moveitObjectToKinBody(collision_detection::CollisionWorld::ObjectConstPtr object, OpenRAVE::EnvironmentBasePtr env);
 
 void importCollisionWorld(Environment::Ptr env, RaveInstance::Ptr rave, const collision_detection::CollisionWorldConstPtr world);
+
+bool setRaveRobotState(OpenRAVE::RobotBasePtr robot, sensor_msgs::JointState js);
