@@ -11,7 +11,7 @@ add_library(moveit_sqpp_planner_plugin src/sqpp_plugin.cpp)
 target_link_libraries(moveit_sqpp_planner_plugin ${MOVEIT_LIB_NAME})
 
 add_executable(test_ros_rave src/test_ros_rave.cpp)
-target_link_libraries(test_ros_rave ${MOVEIT_LIB_NAME} ${BULLET_LIBS} ${MOVEIT_LIB_NAME} ${catkin_LIBRARIES} ${Boost_LIBRARIES})
+target_link_libraries(test_ros_rave ${MOVEIT_LIB_NAME} ${BULLET_LOCAL_LIBS} ${MOVEIT_LIB_NAME} ${catkin_LIBRARIES} ${Boost_LIBRARIES} ${bulletsim_LIBRARIES} ${OPENSCENEGRAPH_LIBRARIES})
 
 install(TARGETS ${MOVEIT_LIB_NAME} moveit_sqpp_planner_plugin
   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}

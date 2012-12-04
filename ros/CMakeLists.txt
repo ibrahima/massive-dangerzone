@@ -26,6 +26,9 @@ find_package(osgGA REQUIRED)
 find_package(osgText REQUIRED)
 find_package(osgUtil REQUIRED)
 find_package(osgViewer REQUIRED)
+# This is better than the above, I think.
+find_package(OpenSceneGraph REQUIRED osgDB osgGA osgText osgUtil osgViewer)
+
 set(OSG_LIBS ${OPENTHREADS_LIBRARY} ${OSG_LIBRARY} ${OSGDB_LIBRARY} ${OSGGA_LIBRARY} ${OSGTEXT_LIBRARY} ${OSGUTIL_LIBRARY} ${OSGVIEWER_LIBRARY})
 set(OSG_INCLUDE_DIRS ${OPENTHREADS_LIBRARY_INCLUDE_DIR} ${OSG_LIBRARY_INCLUDE_DIR} ${OSGDB_LIBRARY_INCLUDE_DIR} ${OSGGA_LIBRARY_INCLUDE_DIR} ${OSGTEXT_LIBRARY_INCLUDE_DIR} ${OSGUTIL_LIBRARY_INCLUDE_DIR} ${OSGVIEWER_LIBRARY_INCLUDE_DIR})
 
@@ -46,9 +49,12 @@ include_directories(${LOG4CPLUS_INCLUDE_DIRS})
 link_directories(${LOG4CPLUS_DIR})
 
 message("Bulletsim dependencies:")
-message("OSG: ${OSG_INCLUDE_DIRS}")
+message("osg: ${osg_INCLUDE_DIRS}")
+message("OSG-Found: ${osg_Found}")
 message("OSGBullet: ${OSGBULLET_DIR}")
 message("Bullet_dir: ${BULLET_DIR}")
+message("BulletSim libraries: ${bulletsim_LIBRARY_DIRS}")
+message("CMAKE_FIND_LIBRARY_PREFIXES: ${CMAKE_FIND_LIBRARY_PREFIXES}")
 
 include_directories(${catkin_INCLUDE_DIRS})
 link_directories(${catkin_LIBRARY_DIRS})

@@ -30,4 +30,6 @@ namespace sqpp_interface_ros
 
 int main(int argc, const char* argv[]){
   cout << "foo" << endl;
+  Scene scene;
+  scene.startViewer();
 }
