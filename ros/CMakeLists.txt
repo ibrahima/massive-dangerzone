@@ -42,10 +42,10 @@ include_directories(${OSG_INCLUDE_DIRS})
 link_directories(${OSG_LIBS})
 include_directories(${OSGBULLET_DIR})
 
-message("FOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO")
-message("${OSG_INCLUDE_DIRS}")
-message("${OSGBULLET_DIR}")
-
+message("Bulletsim dependencies:")
+message("OSG: ${OSG_INCLUDE_DIRS}")
+message("OSGBullet: ${OSGBULLET_DIR}")
+message("Bullet_dir: ${BULLET_DIR}")
 
 include_directories(${catkin_INCLUDE_DIRS})
 link_directories(${catkin_LIBRARY_DIRS})
@@ -53,6 +53,7 @@ include_directories(${bulletsim_INCLUDE_DIRS})
 link_directories(${bulletsim_LIBRARY_DIRS})
 
 include_directories("${BULLET_DIR}/src")
+# TODO: Allow configuring gurobi path
 include_directories("/opt/gurobi501/linux64/include")
 find_package(OpenRAVE 0.8 REQUIRED)
 include_directories(${OpenRAVE_INCLUDE_DIRS})
