@@ -42,6 +42,9 @@ include_directories(${OSG_INCLUDE_DIRS})
 link_directories(${OSG_LIBS})
 include_directories(${OSGBULLET_DIR})
 
+include_directories(${LOG4CPLUS_INCLUDE_DIRS})
+link_directories(${LOG4CPLUS_DIR})
+
 message("Bulletsim dependencies:")
 message("OSG: ${OSG_INCLUDE_DIRS}")
 message("OSGBullet: ${OSGBULLET_DIR}")
@@ -52,6 +55,11 @@ link_directories(${catkin_LIBRARY_DIRS})
 include_directories(${bulletsim_INCLUDE_DIRS})
 link_directories(${bulletsim_LIBRARY_DIRS})
 
+# Trying to get log4cplus to work
+
+add_subdirectory(${LOG4CPLUS_DIR} ${CATKIN_DEVEL_PREFIX})
+
+# TODO: The includes should be reorganized into their own dir in bulletsim
 include_directories("${BULLET_DIR}/src")
 # TODO: Allow configuring gurobi path
 include_directories("/opt/gurobi501/linux64/include")
